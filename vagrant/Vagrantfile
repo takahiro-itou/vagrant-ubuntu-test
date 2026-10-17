@@ -37,14 +37,14 @@ Vagrant.configure("2") do |config|
     v.gui    = false
   end
 
-  config.vm.disk :disk,
-   file_format: "vdi",
-   name: "primary_disk",
-   primary: true,
-   size: "20GB"
+  # config.vm.disk :disk,
+  #  file_ext: "vdi",
+  #  name: "primary_disk",
+  #  primary: true,
+  #  size: "20GB"
 
   config.vm.disk :disk,
-   file_format: "vdi",
+   file_ext: "vdi",
    name: "data_disk",
    primary: false,
    size: "50GB"
