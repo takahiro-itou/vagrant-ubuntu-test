@@ -74,13 +74,13 @@ end
 
 # disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
 
-Vagrant.configure("2") do |config|
-  config.vm.provider "virtualbox" do |v|
-    attach_scsi_hdd(v, disk_image_file)
-  end
-  provision_newhdd_scsi(config.vm)
-  config_detach_trigger(config)
-end
+# Vagrant.configure("2") do |config|
+#   config.vm.provider "virtualbox" do |v|
+#     attach_scsi_hdd(v, disk_image_file)
+#   end
+#   provision_newhdd_scsi(config.vm)
+#   config_detach_trigger(config)
+# end
 
 # Provisioning(s)
 
