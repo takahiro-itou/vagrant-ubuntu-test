@@ -18,6 +18,6 @@ mkdir -p /cygdrive/w/Vagrant/ubuntu-develop/vagrant
 
 time  vagrant destroy -f
 sleep 10
-time  vagrant up ; echo $?
+time  VAGRANT_EXPERIMENTAL="disks"  vagrant up ; echo $?
 
 popd
