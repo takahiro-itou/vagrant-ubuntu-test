@@ -7,13 +7,13 @@
 ##    Load Modules
 ##
 
-load  File.expand_path('common/CommonCustomize.rb')
-load  File.expand_path('common/AttachSCSIHdd.rb')
+# load  File.expand_path('common/CommonCustomize.rb')
+# load  File.expand_path('common/AttachSCSIHdd.rb')
 
-load  File.expand_path('common/UploadFiles.rb')
-load  File.expand_path('common/SetupUbuntu.rb')
-load  File.expand_path('common/RamDisk.rb')
-load  File.expand_path('common/SetupUsers.rb')
+# load  File.expand_path('common/UploadFiles.rb')
+# load  File.expand_path('common/SetupUbuntu.rb')
+# load  File.expand_path('common/RamDisk.rb')
+# load  File.expand_path('common/SetupUsers.rb')
 
 
 ##########################################################################
@@ -62,13 +62,13 @@ end
 
 # Common Customize.
 
-Vagrant.configure("2") do |config|
-  customize_config(config)
+# Vagrant.configure("2") do |config|
+#   customize_config(config)
 
-  config.vm.provider "virtualbox" do |v|
-    customize_vm_provider(v)
-  end
-end
+#   config.vm.provider "virtualbox" do |v|
+#     customize_vm_provider(v)
+#   end
+# end
 
 # Attach Disk.
 
@@ -84,18 +84,18 @@ end
 
 # Provisioning(s)
 
-Vagrant.configure("2") do |config|
-  provision_upload_files(config.vm)
-end
+# Vagrant.configure("2") do |config|
+#   provision_upload_files(config.vm)
+# end
 
-Vagrant.configure("2") do |config|
-  provision_setup_ubuntu(config.vm)
-end
+# Vagrant.configure("2") do |config|
+#   provision_setup_ubuntu(config.vm)
+# end
 
-Vagrant.configure("2") do |config|
-  provision_ram_disk(config.vm)
-end
+# Vagrant.configure("2") do |config|
+#   provision_ram_disk(config.vm)
+# end
 
-Vagrant.configure("2") do |config|
-  provision_setup_users(config.vm)
-end
+# Vagrant.configure("2") do |config|
+#   provision_setup_users(config.vm)
+# end
