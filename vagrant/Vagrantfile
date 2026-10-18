@@ -23,6 +23,16 @@
 
 disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
 
+unless File.exist?(disk_image_file)
+  puts "Start attach_scsi_hdd ..."
+  puts "HDD : disk_file = #{disk_image_file}"
+
+  vboxmanage_path="VBoxManage.exe"
+  size_mb = 50 * 1024
+  system("#{vboxmanage_path} createmedium disk --filename \"#{disk_image_file}\" --size #{size_mb} --format VDI")
+end
+
+
 Vagrant.configure("2") do |config|
   config.vm.box = "takahiro-itou/ubuntu-jammy64-develop"
 
@@ -44,20 +54,6 @@ Vagrant.configure("2") do |config|
   #  name: "primary_disk",
   #  primary: true,
   #  size: "20GB"
-
-  puts "Start attach_scsi_hdd ..."
-  puts "HDD : disk_file = #{disk_image_file}"
-
-  config.vm.provider "virtualbox" do |vb|
-    if !File.exist?(disk_image_file)
-      vb.customize [
-        'createmedium',     'disk',
-        '--filename',       disk_image_file,
-        '--size',           50 * 1024,
-        '--format',         'VDI',
-      ]
-    end
-  end
 
   config.vm.disk :disk,
    file: disk_image_file,
