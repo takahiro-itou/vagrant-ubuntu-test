@@ -7,31 +7,19 @@
 ##    Load Modules
 ##
 
-# load  File.expand_path('common/CommonCustomize.rb')
-# load  File.expand_path('common/AttachSCSIHdd.rb')
+load  File.expand_path('common/CommonCustomize.rb')
+load  File.expand_path('common/AttachSCSIHdd.rb')
 
-# load  File.expand_path('common/UploadFiles.rb')
-# load  File.expand_path('common/SetupUbuntu.rb')
-# load  File.expand_path('common/RamDisk.rb')
-# load  File.expand_path('common/SetupUsers.rb')
+load  File.expand_path('common/UploadFiles.rb')
+load  File.expand_path('common/SetupUbuntu.rb')
+load  File.expand_path('common/RamDisk.rb')
+load  File.expand_path('common/SetupUsers.rb')
 
 
 ##########################################################################
 ##
 ##    Configuration
 ##
-
-disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
-
-unless File.exist?(disk_image_file)
-  puts "Start attach_scsi_hdd ..."
-  puts "HDD : disk_file = #{disk_image_file}"
-
-  vboxmanage_path="VBoxManage.exe"
-  size_mb = 50 * 1024
-  system("#{vboxmanage_path} createmedium disk --filename \"#{disk_image_file}\" --size #{size_mb} --format VDI")
-end
-
 
 Vagrant.configure("2") do |config|
   config.vm.box = "takahiro-itou/ubuntu-jammy64-develop"
@@ -49,20 +37,8 @@ Vagrant.configure("2") do |config|
     v.gui    = false
   end
 
-  # config.vm.disk :disk,
-  #  file_ext: "vdi",
-  #  name: "primary_disk",
-  #  primary: true,
-  #  size: "20GB"
-
-  config.vm.disk :disk,
-   file: disk_image_file,
-   name: "data_disk",
-   primary: false,
-   size: 50 * 1024 * 1024 * 1024
-
   config.vm.network(:forwarded_port, guest: 22, host: 11022, id: "ssh")
-  config.vm.network("private_network", ip: "192.168.33.150")
+  config.vm.network("private_network", ip: "192.168.33.15")
   config.vm.synced_folder(".", "/vagrant", disabled: true)
 end
 
@@ -74,40 +50,40 @@ end
 
 # Common Customize.
 
-# Vagrant.configure("2") do |config|
-#   customize_config(config)
+Vagrant.configure("2") do |config|
+  customize_config(config)
 
-#   config.vm.provider "virtualbox" do |v|
-#     customize_vm_provider(v)
-#   end
-# end
+  config.vm.provider "virtualbox" do |v|
+    customize_vm_provider(v)
+  end
+end
 
 # Attach Disk.
 
-# disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
+disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
 
-# Vagrant.configure("2") do |config|
-#   config.vm.provider "virtualbox" do |v|
-#     attach_scsi_hdd(v, disk_image_file)
-#   end
-#   provision_newhdd_scsi(config.vm)
-#   config_detach_trigger(config)
-# end
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |v|
+    attach_scsi_hdd(v, disk_image_file)
+  end
+  provision_newhdd_scsi(config.vm)
+  config_detach_trigger(config)
+end
 
 # Provisioning(s)
 
-# Vagrant.configure("2") do |config|
-#   provision_upload_files(config.vm)
-# end
+Vagrant.configure("2") do |config|
+  provision_upload_files(config.vm)
+end
 
-# Vagrant.configure("2") do |config|
-#   provision_setup_ubuntu(config.vm)
-# end
+Vagrant.configure("2") do |config|
+  provision_setup_ubuntu(config.vm)
+end
 
-# Vagrant.configure("2") do |config|
-#   provision_ram_disk(config.vm)
-# end
+Vagrant.configure("2") do |config|
+  provision_ram_disk(config.vm)
+end
 
-# Vagrant.configure("2") do |config|
-#   provision_setup_users(config.vm)
-# end
+Vagrant.configure("2") do |config|
+  provision_setup_users(config.vm)
+end
