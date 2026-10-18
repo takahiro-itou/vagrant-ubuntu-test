@@ -21,6 +21,8 @@
 ##    Configuration
 ##
 
+disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
+
 Vagrant.configure("2") do |config|
   config.vm.box = "takahiro-itou/ubuntu-jammy64-develop"
 
@@ -42,8 +44,6 @@ Vagrant.configure("2") do |config|
   #  name: "primary_disk",
   #  primary: true,
   #  size: "20GB"
-
-  disk_image_file = File.expand_path('./disk/ubuntu-test-sdc.vdi')
 
   puts "Start attach_scsi_hdd ..."
   puts "HDD : disk_file = #{disk_image_file}"
